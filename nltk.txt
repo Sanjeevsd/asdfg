@@ -1,2 +1,2 @@
 stopwords
-all
+punkt
