@@ -67,6 +67,9 @@ def uploadproject(request):
         file=request.FILES['projectfileupload']
         projectname=request.POST['uploadfilename']
         title,body= pdftext.pdf_to_txt(file)
+        if title=='error':
+            messages.error(request,f"Invalid Project File {file}")
+            return HttpResponseRedirect('/')
         dbhandel.save_project(request.user.username, projectname, title,body)
     return HttpResponseRedirect('/')
 

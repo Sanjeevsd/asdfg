@@ -12,12 +12,8 @@ def retriveproject(name):
     c = connection.cursor()
     d=c.execute("SELECT PROJECT_NAME,PROJECT_TITLE,PROJECT_CONTENT FROM project_details where NAME=?",(name,))
     data_t={}
-    datac = {}
     for names in d.fetchall():
-        datac["title"] =names[1]
-        datac["body"] = names[2]
-        data_t[names[0]]=datac
+        data_t[names[0]]={"title":names[1],"body":names[2]}
 
     connection.close()
-    print(datac)
     return data_t

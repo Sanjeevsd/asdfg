@@ -16,6 +16,12 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
 <body class="is-boxed has-animations">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
     <div class="body-wrap boxed-container">
         <header class="site-header">
             <div class="container">
@@ -32,10 +38,9 @@
                     <ul class="header-links list-reset m-0">
 
                         <li>
-                            <div class="chip" >
+                            <div class="chip" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {% load static %}
                               <img src="{% static 'login/img/avatar.jpg' %}" alt="Person">
-
                                 <span id="user_name" >
                                     {% if messages %}
                                         {% for message in messages %}
@@ -45,6 +50,7 @@
                                     {% endfor %}
                                     {% endif %}
                                 </span>
+                                <button type="button" class="btn btn-info"  action="logout" style="alignment: center" onclick="location.href='{% url 'logout' %}'">Logout</button>
                             </div>
                         </li>
                     </ul>
@@ -102,13 +108,13 @@
                         <li class="list-group-item">
                             Project Name:{{k}} <br>Project Title:{{v.title}}
                              <p>
-                              <a class="btn btn-link" data-toggle="collapse" href="#view_projectdetail" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">View Contents</a>
+                              <button class="btn btn-link" data-toggle="collapse" data-target="#{{k}}" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">View {{k}}</button>
                             </p>
-                                <div class="collapse multi-collapse" id="view_projectdetail">
-                                  <div class="card card-body">
-                                  </div>
+
+                                <p class="collapse multi-collapse" id="{{k}}">
                                     {{v.body}}
-                                </div>
+                                </p>
+
                         </li>
                         {% endfor %}
                     {% endif %}
@@ -145,12 +151,28 @@
 <footer class="site-footer">
             <div class="container">
                 <div class="site-footer-inner">
-       <button type="button" class="btn btn-info"  action="logout" style="alignment: center" onclick="location.href='{% url 'logout' %}'">Logout</button>
+
             </div>
             </div>
         </footer>
     </div>
+{% if messages %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    {% for mess in messages %}
+        {% if "successfully" in mess.message %}
+         <script>toastr.success("{{ mess.message }}")</script>
+                {% elif "Invalid" in mess.message%}
+        <script>toastr.error("{{ mess.message }}")</script>
 
+
+
+        {% endif%}
+
+        {% endfor %}
+
+    {% endif %}
     {% load static %}
     <script src="{% static '/login/main.min.js' %}"></script>
 <script src="{% static '/login/bootstrap.js' %}"></script>
