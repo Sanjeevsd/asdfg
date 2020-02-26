@@ -9,6 +9,7 @@ django-heroku==0.3.1
 gunicorn==20.0.4
 idna==2.9
 joblib==0.14.1
+nltk==3.4.5
 numpy==1.18.1
 oauthlib==3.1.0
 pandas==1.0.1
