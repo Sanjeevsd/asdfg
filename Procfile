@@ -1,1 +1,1 @@
-web: gunicorn projectstack.wsgi
+web: gunicorn projectstack.wsgi 
