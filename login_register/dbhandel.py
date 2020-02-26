@@ -10,9 +10,14 @@ def save_project(name,project,p_title,project_content):
 def retriveproject(name):
     connection = sqlite3.connect('db.sqlite3')
     c = connection.cursor()
-    d=c.execute("SELECT PROJECT_NAME,PROJECT_TITLE FROM project_details where NAME=?",(name,))
-    data={}
+    d=c.execute("SELECT PROJECT_NAME,PROJECT_TITLE,PROJECT_CONTENT FROM project_details where NAME=?",(name,))
+    data_t={}
+    datac = {}
     for names in d.fetchall():
-        data[names[0]]=names[1]
+        datac["title"] =names[1]
+        datac["body"] = names[2]
+        data_t[names[0]]=datac
+
     connection.close()
-    return data
+    print(datac)
+    return data_t

@@ -54,6 +54,7 @@ def homepage(request):
         uname=request.user.username
         email=request.user.email
         data=dbhandel.retriveproject(uname)
+        # messages.add_message(request,1111,data_body)
         messages.add_message(request, 101, email)
         messages.add_message(request, 100, uname)
         return render(request,"home.html",{"data":data})
@@ -65,7 +66,6 @@ def uploadproject(request):
     if request.method == "POST":
         file=request.FILES['projectfileupload']
         projectname=request.POST['uploadfilename']
-        print(projectname,file)
         title,body= pdftext.pdf_to_txt(file)
         dbhandel.save_project(request.user.username, projectname, title,body)
     return HttpResponseRedirect('/')

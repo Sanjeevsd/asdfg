@@ -98,9 +98,17 @@
                 <div id="projects" class="tab-pane">
                     <ul class="list-group">
                       {% if data %}
-                       {% for k,v in data.items %}
+                        {% for k,v in data.items %}
                         <li class="list-group-item">
-                            Project Name:{{k}} <br>Project Title:{{v}}
+                            Project Name:{{k}} <br>Project Title:{{v.title}}
+                             <p>
+                              <a class="btn btn-link" data-toggle="collapse" href="#view_projectdetail" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">View Contents</a>
+                            </p>
+                                <div class="collapse multi-collapse" id="view_projectdetail">
+                                  <div class="card card-body">
+                                  </div>
+                                    {{v.body}}
+                                </div>
                         </li>
                         {% endfor %}
                     {% endif %}
