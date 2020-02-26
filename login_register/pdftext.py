@@ -7,32 +7,27 @@ import pdftotext
 def pdf_to_txt(f):
     all_data = [['Title', 'Content']]
     reading = pdftotext.PDF(f)
-    with open('../project.txt', 'w') as f:
-        f.write("\n\n".join(reading))
-        print(f)
-    with open("../project.txt", 'r') as fls:
-        reading=fls.readlines()
-        listToStr = ' '.join([str(elem) for elem in reading])
-        title = reading[0].strip()
-        body = listToStr.strip()
+    project_data=StringIO()
+    for pages in reading:
+        project_data.write(pages)
+    project_data_content=project_data.getvalue()
+    reading=project_data_content.split("\n")
+    title = reading[0].strip()
+    body = project_data_content.strip()
+    '''removes spaces, newlines and tabs'''
+    tab_removed = re.sub('\s+', ' ', body)
 
-        '''removes spaces, newlines and tabs'''
-        tab_removed = re.sub('\s+', ' ', body)
+    '''removes numbers'''
+    data_withoutnum = re.sub('\d+', '', tab_removed)
 
-        '''removes numbers'''
-        data_withoutnum = re.sub('\d+', '', tab_removed)
+    '''remove_unwanted_strings'''
+    new_data = data_withoutnum.replace('.', '').replace('\'', '').replace(',', '').replace('"', '').replace('[',
+                                                                                                            '').replace(
+        ']', '').replace('(', '').replace(')', '').replace('  ', '').replace('-', '')
 
-        '''remove_unwanted_strings'''
-        new_data = data_withoutnum.replace('.', '').replace('\'', '').replace(',', '').replace('"', '').replace('[',
-                                                                                                                '').replace(
-            ']', '').replace('(', '').replace(')', '').replace('  ', '').replace('-', '')
-
-        '''removes words whose length <3'''
-        removed_words = re.sub(r'\b\w{1,3}\b', ' ', new_data)
-        filtered_data = removed_words.replace('  ', '')
-        all_data.append([title, filtered_data])
-    with open('../project_data.csv', 'a', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerows(all_data)
+    '''removes words whose length <3'''
+    removed_words = re.sub(r'\b\w{1,3}\b', ' ', new_data)
+    filtered_data = removed_words.replace('  ', '')
+    all_data.append([title, filtered_data])
     return (title,filtered_data)
 

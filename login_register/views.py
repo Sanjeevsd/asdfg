@@ -67,7 +67,7 @@ def uploadproject(request):
         projectname=request.POST['uploadfilename']
         print(projectname,file)
         title,body= pdftext.pdf_to_txt(file)
-        dbhandel.save_project(request.user.username, projectname, title)
+        dbhandel.save_project(request.user.username, projectname, title,body)
     return HttpResponseRedirect('/')
 
 
