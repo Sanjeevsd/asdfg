@@ -1,18 +1,15 @@
-
-{% load static %}
 <!DOCTYPE html>
-<html lang="en" style="background-image: url('{% static 'login/img/bg.jpg' %}');" >
+<html lang="en">
   <head>
-
+      {% load static %}
     <meta charset="UTF-8" />
       <link rel="shortcut icon" type="image/x-icon" href="{% static 'login/whatproject.ico' %}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
    <link rel="stylesheet" href="{%  static 'login/css/style.css' %}" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
     <title>Register</title>
   </head>
-  <body >
+  <body style="background-image: url('{% static 'login/img/bg.jpg' %}');">
   {#  popovers #}
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
@@ -20,8 +17,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <section class="login">
-       {% if messages %}
+    <div class="pstack">
+         {% if messages %}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
@@ -36,10 +33,10 @@
         {% endfor %}
 
     {% endif %}
-      <div class="loginbox">
+      <div class="form-box">
+
         <h1 >Sign Up</h1>
         <h2>
-          {% csrf_token %}
           Already have an account?
           <a href="/login" id="create">Sign in</a>
         </h2>
@@ -61,17 +58,61 @@
             <input type="password" id="confirmpassword" name="ConfirmPassword" required oninvalid="setCustomValidity('Confirm Password')" oninput="setCustomValidity('')"/>
             <span data-placeholder="Confirm Password"></span>
           </div>
+        <div class="signin-div">
+          <input class="sigin" type="submit" value="Sign in" />
+        </div>
+        </form>
+        <h3>Or</h3>
+          <div class="signin-div">
+          <button class="gsigin">
+            <img id="gicon" src="{% static 'login/img/icon/iconfinder_Google_1298745.svg' %}" style="padding-right: 8px;"/>
+            <p style="display: inline; font-size: 1rem;"> Sign in with Google</p>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- <section class="login">
+      <div class="loginbox">
+        <h1 >Sign Up</h1>
+        <h2>
+          Already have an account?
+          <a href="#" id="create">Sign in</a>
+        </h2>
+        <form>
+          <div class="txtb">
+            <input type="email" />
+            <span data-placeholder="Email Address"></span>
+          </div>
+          <div class="txtb">
+            <input type="txt" />
+            <span data-placeholder="Username"></span>
+          </div>
+          <div class="txtb">
+            <input type="password" />
+            <span data-placeholder="Password"></span>
+          </div>
+          <div class="txtb">
+            <input type="password" />
+            <span data-placeholder="Confirm Password"></span>
+          </div>
+          <div class="txtb">
+            <input type="password" />
+            <span data-placeholder="Password"></span>
+          </div>
           <input class="sigin" type="submit" value="Sign up" />
+        </form>
           <h3>Or</h3>
           <div class="rect"></div>
           <div class="rect1"></div>
           <button class="gsigin">
-            <img id="gicon" src="{% static 'login/img/icon/iconfinder_Google_1298745.svg' %}" style="padding-right: 8px;"/>
+            <img id="gicon" src="img/icon/iconfinder_Google_1298745.svg" style="padding-right: 8px;"/>
              Sign in with Google
           </button>
-        </form>
+
       </div>
-    </section>
+    </section> -->
     <script type="text/javascript">
       $(".txtb input").on("focus",function(){
         $(this).addClass("focus");
