@@ -312,12 +312,13 @@ h3:after {
 }
 .side-txt{
   font-size: 1.3rem;
+  transition: 0.5s;
 }
 #testing{
   margin-left: auto;
   float: inline-end;
   position: absolute;
-  transform: translate(0%) scale(0%);
+  
 }
 #anilight{
   visibility: hidden;
@@ -329,17 +330,31 @@ h3:after {
 #bulb{
   margin-left: auto;
   visibility: collapse;
+  transition: 0.1s;
 }
 .side-link:hover #anilight{
   transform: scale(1);
 visibility: visible;
 }
 
-.side-link:hover #bulb{
 
+.side-item.active #anilight{
+visibility: visible;
+transform: scale(1);
+}
+.side-item.active #bulb{
+  visibility: visible;
+  }
+.side-item.active .side-txt{
+ color: white;
+  }
+.side-link:hover #bulb{
   visibility: visible;
   }
 
+.side-link:hover .side-txt{
+  color: white;
+  }
   .anilight{
     /* Style for "light" */
   width: 235px;
