@@ -24,5 +24,5 @@ scikit-learn
 scipy
 six==1.14.0
 sqlparse==0.3.0
-urllib3==1.25.8
+urllib3==1.26.5
 whitenoise==5.0.1
